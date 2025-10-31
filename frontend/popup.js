@@ -163,8 +163,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const pageUrl = activeTab.url;
 
       if (pageUrl.endsWith('.pdf')) {
-        addMessageToChat('ai', '📄 Found a PDF! Fetching and reading...');
-        fetchAndProcess('http://127.0.0.1:5000/process_pdf', { pdf_url: pageUrl });
+        if (pageUrl.startsWith('http')) {
+          addMessageToChat('ai', '📄 Found an online PDF! Fetching and reading...');
+          fetchAndProcess('http://127.0.0.1:5000/process_pdf', { pdf_url: pageUrl });
+        } else {
+          addMessageToChat('ai', '❌ Sorry, I can only process online PDFs (starting with http/https).');
+          updateStatus('error', 'Local PDFs cannot be processed. Please use an online link.');
+        }
       
       } else if (pageUrl.includes("youtube.com/watch")) {
         const urlParams = new URLSearchParams(new URL(pageUrl).search);

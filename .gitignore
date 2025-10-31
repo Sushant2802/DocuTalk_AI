@@ -1,2 +1,20 @@
-# Environment files
+# Ignore virtual environment
+venv/
+backend/venv/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore environment secrets
 .env
+
+# Ignore logs and OS junk
+*.log
+.DS_Store
+*.sqlite3
+
+# Ignore frontend build/cache
+node_modules/
